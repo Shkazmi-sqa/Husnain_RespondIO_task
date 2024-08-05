@@ -18,7 +18,7 @@ public class LoginApplication extends baseClass {
         LogPage= PageFactory.initElements(driver, LoginPage.class);
 
     }
-@Test
+@Test(priority=1)
     public void ApplicationLoginTry() throws InterruptedException {
         try {
             LogPage.LoginPage_isdisplayed();

@@ -8,9 +8,8 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
+import org.testng.annotations.*;
+import testCases.LoginApplication;
 
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -27,12 +26,14 @@ public class baseClass {
     protected String ExecutionMode;
 
 
-    @BeforeClass
+
+    @BeforeSuite
     public void suiteSetUP() throws InterruptedException {
         configReader.initializePropertyFile();
         BrowserType= configReader.property.getProperty("BrowserType");
         ExecutionMode= configReader.property.getProperty("ExecutionMode");
         AppUrl= configReader.property.getProperty("APP_URL");
+
         try {
             initialize(BrowserType,AppUrl,ExecutionMode);
         } catch (InterruptedException e) {
@@ -76,6 +77,7 @@ public class baseClass {
             driver.manage().window().maximize();
             driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
+
             driver.get(AppURLProperty);
         }catch (Exception e) {
             System.out.println(e);
@@ -87,7 +89,7 @@ public class baseClass {
     }
 
 
-    @AfterClass(alwaysRun = true)
+    @AfterSuite(alwaysRun = true)
     public void tearDown() throws Exception {
 
         try {
