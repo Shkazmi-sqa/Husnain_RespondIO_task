@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Main Test Suite">
+<suite name="Main Test Suite" parallel="false">
     <listeners>
         <listener class-name="utils.TestListeners"></listener>
     </listeners>
     <test name="TestNG Test Group">
         <classes>
+            <class name="Base.AppLogin"/>
+            <class name="apiTestCases.LoginAPICases"/>
             <class name="testCases.AddWorkspace_user"/>
         </classes>
     </test>

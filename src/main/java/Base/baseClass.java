@@ -8,22 +8,25 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.*;
-import testCases.LoginApplication;
+import pageFactory.LoginPage;
 
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.concurrent.TimeUnit;
-@Listeners(utils.TestListeners.class)
+//@Listeners(utils.TestListeners.class)
 public class baseClass {
 
-    public WebDriver driver;
-
+    public static WebDriver driver;
 
     protected String AppUrl;
     protected String BrowserType;
     protected String ExecutionMode;
+
+
+
 
 
 
@@ -34,8 +37,10 @@ public class baseClass {
         ExecutionMode= configReader.property.getProperty("ExecutionMode");
         AppUrl= configReader.property.getProperty("APP_URL");
 
+
         try {
             initialize(BrowserType,AppUrl,ExecutionMode);
+
         } catch (InterruptedException e) {
             System.out.println(e);
             throw new RuntimeException(e);
@@ -76,9 +81,8 @@ public class baseClass {
 
             driver.manage().window().maximize();
             driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-
-
             driver.get(AppURLProperty);
+
         }catch (Exception e) {
             System.out.println(e);
             throw new RuntimeException(e);
@@ -87,6 +91,7 @@ public class baseClass {
 
 
     }
+
 
 
     @AfterSuite(alwaysRun = true)
@@ -104,8 +109,8 @@ public class baseClass {
 
     protected void cleanUp() {
      try{
-        this.driver.close();
-        //this.driver.quit();
+        //this.driver.close();
+        this.driver.quit();
     }catch (Exception e) {
         System.out.println(e);
         throw new RuntimeException(e);
